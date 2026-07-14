@@ -26,13 +26,16 @@ jobs:
           flutter-version: any
           channel: 'stable'
 
-      - name: Recreate Android Project and Inject Intents
+      - name: Recreate Android Project and Install Dependencies
         run: |
           rm -rf android
           flutter create . --platforms=android
+          
+          # تثبيت مكتبة فتح الروابط الخارجية قسرياً داخل السيرفر السحابي
+          flutter pub add url_launcher
           flutter pub get
           
-          # سطر سحري لحقن أذونات المتصفح تلقائياً داخل ملف الإعدادات المولد سحابياً
+          # حقن أذونات المتصفح تلقائياً داخل ملف الإعدادات المولد سحابياً
           sed -i '/<application/i \    <queries>\n        <intent>\n            <action android:name="android.intent.action.VIEW" />\n            <category android:name="android.intent.category.BROWSABLE" />\n            <data android:scheme="https" />\n        </intent>\n        <intent>\n            <action android:name="android.intent.action.VIEW" />\n            <category android:name="android.intent.category.BROWSABLE" />\n            <data android:scheme="http" />\n        </intent>\n    </queries>\n' android/app/src/main/AndroidManifest.xml
 
       - name: Build Debug APK
