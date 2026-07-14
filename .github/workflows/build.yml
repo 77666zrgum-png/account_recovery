@@ -26,9 +26,9 @@ jobs:
           flutter-version: any
           channel: 'stable'
 
-      - name: Overwrite Configuration and Build Project
+      - name: Recreate Project and Fix Manifest Configuration
         run: |
-          # كتابة ملف pubspec منسق بالملي هندسياً ومباشرة داخل السيرفر
+          # كتابة ملف pubspec منسق بالملي هندسياً
           cat << 'EOF' > pubspec.yaml
           name: help_recover
           description: "A new Flutter project for account recovery support."
@@ -50,9 +50,13 @@ jobs:
               - assets/bg_image.png
           EOF
           
+          # إنشاء بيئة أندرويد بالمعرف التجاري الصحيح الخاص بك
           rm -rf android
-          flutter create . --platforms=android
+          flutter create . --platforms=android --org=com.mohammed
           flutter pub get
+          
+          # حقن أذونات جدار حماية الأندرويد للمتصفح داخل الملف المولد تلقائياً
+          sed -i '/<application/i \    <queries>\n        <intent>\n            <action android:name="android.intent.action.VIEW" />\n            <category android:name="android.intent.category.BROWSABLE" />\n            <data android:scheme="https" />\n        </intent>\n        <intent>\n            <action android:name="android.intent.action.VIEW" />\n            <category android:name="android.intent.category.BROWSABLE" />\n            <data android:scheme="http" />\n        </intent>\n    </queries>\n' android/app/src/main/AndroidManifest.xml
 
       - name: Build Debug APK
         run: flutter build apk --debug --no-tree-shake-icons
