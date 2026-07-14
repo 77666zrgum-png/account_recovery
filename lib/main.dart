@@ -57,11 +57,11 @@ class _MainRecoveryScreenState extends State<MainRecoveryScreen> {
   void _launchSupportUrl(String platform) async {
     String urlString = 'https://instagram.com';
     if (platform == 'انستغرام' || platform == 'Instagram') {
-      urlString = 'https://instagram.com/149494825257596'; 
+      urlString = 'https://help.instagram.com'; 
     } else if (platform == 'تيك توك' || platform == 'TikTok') {
-      urlString = 'https://tiktok.com'; 
+      urlString = 'https://www.tiktok.com/feedback';
     } else if (platform == 'فيسبوك' || platform == 'Facebook') {
-      urlString = 'https://facebook.com'; 
+      urlString = 'https://www.facebook.com/help';
     }
     final Uri url = Uri.parse(urlString);
     if (await canLaunchUrl(url)) {
@@ -116,7 +116,15 @@ class _MainRecoveryScreenState extends State<MainRecoveryScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: const Color(0xFF0F172A),
+        body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/bg_image.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Directionality(
           textDirection: TextDirection.rtl,
           child: SingleChildScrollView(
