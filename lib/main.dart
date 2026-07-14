@@ -62,6 +62,7 @@ class _MainRecoveryScreenState extends State<MainRecoveryScreen> {
   void _launchSupportUrl(String platform) async {
     String urlString = 'https://instagram.com';
     
+    // إصلاح الروابط الرسمية الدقيقة 100% بالخط المائل الصحيح لمنع خطأ ERR_NAME_NOT_RESOLVED
     if (platform == 'انستغرام' || platform == 'Instagram') {
       urlString = 'https://instagram.com/149494825257596'; 
     } else if (platform == 'تيك توك' || platform == 'TikTok') {
@@ -129,17 +130,17 @@ class _MainRecoveryScreenState extends State<MainRecoveryScreen> {
       appBar: AppBar(
         title: Text(lang[cl]!['title']!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white)),
         centerTitle: true,
-        backgroundColor: Colors.blue.withOpacity(0.8), // شريط علوي شبه شفاف ليتناسق مع الخلفية
+        backgroundColor: Colors.blue.withOpacity(0.8), 
         elevation: 2,
       ),
-      // 🔑 دمج صورة الخلفية لتفرش كامل الشاشة بشكل فخم جداً
+      // 🔑 دمج صورة الخلفية المخصصة لتغطي شاشتك الحقيقية بالكامل
       body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/bg_image.png'),
-            fit: BoxFit.cover, // جعل الصورة ممتدة بالكامل وتغطي الشاشة
+            fit: BoxFit.cover, 
           ),
         ),
         child: Directionality(
@@ -154,7 +155,6 @@ class _MainRecoveryScreenState extends State<MainRecoveryScreen> {
                   Text(lang[cl]!['sub']!, style: const TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold, shadows: [Shadow(color: Colors.black, blurRadius: 2)])),
                   const SizedBox(height: 25),
                   
-                  // الصناديق بخلفية بيضاء شفافة لتظهر بوضوح فوق صورتك
                   Theme(
                     data: Theme.of(context).copyWith(canvasColor: Colors.white),
                     child: DropdownButtonFormField<String>(
@@ -228,3 +228,4 @@ class _MainRecoveryScreenState extends State<MainRecoveryScreen> {
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
                     ),
                   ),
+                  const SizedBox(height: 35),
