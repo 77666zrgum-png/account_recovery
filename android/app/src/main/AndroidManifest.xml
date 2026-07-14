@@ -1,10 +1,7 @@
-<manifest xmlns:android="http://android.com"
-    package="com.mohammed.helprecover">
+<manifest xmlns:android="http://android.com">
     
-    <!-- أذونات الإنترنت الإلزامية لفتح روابط الدعم -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <!-- تهيئة بيئة تشغيل واجهة التطبيق الخارجية والداخلية -->
     <application
         android:label="استرجاع حسابات انستغرام وتيك توك وفيسبوك"
         android:name="${applicationName}"
