@@ -26,20 +26,33 @@ jobs:
           flutter-version: any
           channel: 'stable'
 
-      - name: Recreate Android and Inject Configuration
+      - name: Overwrite Configuration and Build Project
         run: |
+          # كتابة ملف pubspec منسق بالملي هندسياً ومباشرة داخل السيرفر
+          cat << 'EOF' > pubspec.yaml
+          name: help_recover
+          description: "A new Flutter project for account recovery support."
+          publish_to: 'none'
+          version: 1.0.0+1
+          environment:
+            sdk: '>=3.0.0 <4.0.0'
+          dependencies:
+            flutter:
+              sdk: flutter
+            url_launcher: ^6.2.5
+          dev_dependencies:
+            flutter_test:
+              sdk: flutter
+            flutter_lints: ^3.0.0
+          flutter:
+            uses-material-design: true
+            assets:
+              - assets/bg_image.png
+          EOF
+          
           rm -rf android
           flutter create . --platforms=android
-          
-          # تثبيت مكتبة فتح الروابط الخارجية
-          flutter pub add url_launcher
           flutter pub get
-          
-          # 🔑 سطر ذكي لتسجيل مسار صورة الخلفية تلقائياً داخل ملف الإعدادات pubspec
-          sed -i '/flutter:/a \  assets:\n    - assets/bg_image.png' pubspec.yaml
-          
-          # حقن أذونات المتصفح داخل ملف الأندرويد المولد سحابياً
-          sed -i '/<application/i \    <queries>\n        <intent>\n            <action android:name="android.intent.action.VIEW" />\n            <category android:name="android.intent.category.BROWSABLE" />\n            <data android:scheme="https" />\n        </intent>\n        <intent>\n            <action android:name="android.intent.action.VIEW" />\n            <category android:name="android.intent.category.BROWSABLE" />\n            <data android:scheme="http" />\n        </intent>\n    </queries>\n' android/app/src/main/AndroidManifest.xml
 
       - name: Build Debug APK
         run: flutter build apk --debug --no-tree-shake-icons
