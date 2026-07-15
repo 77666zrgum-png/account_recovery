@@ -116,17 +116,17 @@ class _MainRecoveryScreenState extends State<MainRecoveryScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        body: Container(
+        child: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bg_image.png'),
-            fit: BoxFit.cover,
-          ),
+decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bg_image.png'),
+          fit: BoxFit.cover,
         ),
-        child: Directionality(
-          textDirection: TextDirection.rtl,
+      ),
+      child: Directionality(
+        textDirection: TextDirection.rtl,
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
             child: Form(
