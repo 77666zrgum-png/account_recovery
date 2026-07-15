@@ -23,7 +23,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.6' 
+          flutter-version: any
           channel: 'stable'
 
       - name: Recreate Project Clean and Stable
@@ -49,15 +49,15 @@ jobs:
             assets:
               - assets/bg_image.png
           EOF
-
-          - name: Recreate Project Clean and Stable
-         run: |
+          
+          # 2. توليد بيئة أندرويد نظيفة ومستقرة تماماً من الصفر
           rm -rf android
           flutter create . --platforms=android --org=com.mohammed --project-name=help_recover
           flutter pub get
 
       - name: Build Debug APK
         run: flutter build apk --debug --no-tree-shake-icons
+
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
