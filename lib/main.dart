@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
-    runApp: const HelpRecoverApp()),
+    runApp: const HelpRecoverApp());
 }
 
 class HelpRecoverApp extends StatelessWidget {
