@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => LanguageProvider(),
-      child: const HelpRecoverApp(),
-    ),
-  );
+    runApp: const HelpRecoverApp()),
 }
 
 class HelpRecoverApp extends StatelessWidget {
